@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<h1>User Waitlist Form</h1>
+  <form id="waitlistForm">
+
+    <label for="userName"><strong>Full Name:</strong></label>
+    <input type="text" id="userName" /> <br><br>
+
+    <label for="phoneNumber"><strong>Phone Number:</strong></label>
+    <input type="number" id="phoneNumber" /><br><br>
+
+    <label for="email"><strong>Email Id:</strong></label>
+    <input type="email" id="email" /><br><br>
+
+    <label><strong>Gender:</strong></label><br>
+    <label for="male"><input type="radio" name="gender" value="male" id="male" />Male</label><br>
+    <label for="female"><input type="radio" name="gender" value="female" id="female" />Female</label><br>
+    <label for="other"><input type="radio" name="gender" value="other" id="other" />Other</label><br><br>
+
+    <label><strong>Are you a college graduate?:</strong></label><br>
+    <label for="yes"><input type="radio" name="graduate" value="yes" id="yes" />Yes</label><br>
+    <label for="no"><input type="radio" name="graduate" value="no" id="no" />No</label><br>
+    <label for="dropout"><input type="radio" name="graduate" value="dropout" id="dropout" />Dropout</label><br><br>
+
+    <label><strong>Are you working anywhere full-time or part-time?:</strong></label><br>
+    <select id="jobTimings">
+      <option value="fullTime">Working Full Time</option>
+      <option value="partTime">Working Part Time</option>
+      <option value="notWorking">Not Working Anywhere</option>
+</select><br><br>
+
+    <label for="why"><strong>Why do you want to learn web development?:</strong></label><br>
+    <textarea id="why" rows="5" cols="40"></textarea>
+    <br><br>
+
+    <label><strong>How did you come to know about us?:</strong></label><br>
+    <label for="youtube"><input type="checkbox" name="sites" value="youtube" /></label>Youtube<br>
+    <label for="instagram"><input type="checkbox" name="sites" value="instagram" /></label>Instagram<br>
+    <label for="linkdin"><input type="checkbox" name="sites" value="linkdin" /></label>LinkedIn<br>
+    <label for="twitter"><input type="checkbox" name="sites" value="twitter" /></label>Twitter<br>
+    <label for="friends"><input type="checkbox" name="sites" value="friends" /></label>Friends and Family<br>
+    <label for="other"><input type="checkbox" name="sites" value="other" /></label>Other<br><br>
+
+    <label for="confirm"><input type="checkbox" name="confirmBox" value="confirm" /></label><strong>I confirm taht all information in this form is factually true.</strong><br><br>
+
+    <input type="submit" value="Submit Details" />
+    
+  </form>
+  <div id="formResult"></div>
+
+  <script>
+
+    const waitlistForm = document.getElementById("waitlistForm")
+    
+    waitlistForm.addEventListener("submit", function(event){
+      event.preventDefault()
+
+      const userName = document.getElementById("userName").value
+      const phoneNumber = document.getElementById("phoneNumber").value
+      const email = document.getElementById("email").value
+       
+      const gender = document.querySelector('input[name="gender"]:checked').value
+      const graduate = document.querySelector('input[name="graduate"]:checked').value
+      const jobTimings = document.getElementById("jobTimings").value
+      const why = document.getElementById("why").value
+      const sites = document.querySelectorAll('input[name="sites"]:checked')
+      selectedSites = []
+      for(i=0; i<sites.length; i++){
+        selectedSites.push(sites[i].value)
+      }
+
+      const inputData = `<h2>Details Submitted</h2>
+      <p><strong>Name: </strong>${userName}</p>
+      <p><strong>Phone Number: </strong>${phoneNumber}</p>
+<p><strong>Email Id: </strong>${email}</p>
+<p><strong>Gender: </strong>${gender}</p>
+<p><strong>Are you a college graduate?: </strong>${graduate}</p>
+<p><strong>Are you working anywhere full-time or part-time?: </strong>${jobTimings}</p>
+<p><strong>Why do you want to learn web development?: </strong>${why}</p>
+<p><strong>How did you come to know about us?: </strong>${selectedSites.join(', ')}</p>
+
+      `
+      divElement = document.getElementById("formResult")
+      divElement.innerHTML = inputData
+      
+    })
+    
+  </script>
+  
+</body>
+
+</html>
